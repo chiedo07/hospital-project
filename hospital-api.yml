@@ -8,7 +8,45 @@ variables:
   - group: my-var
 
 stages:
-    - stage: docker_build
-      displayName:  Build and Push Docker Images
-      jobs:
-          - job: Build
+ 
+- stage: docker_build
+  displayName: Build & Push Docker Images
+  jobs:
+  - job: build
+    displayName: Docker Build
+    steps:
+    - checkout: self
+ 
+    - task: Docker@2
+      displayName: Build & Push Frontend
+      inputs:
+        containerRegistry: DockerHubServiceConnection
+        repository: sathish33/frontend_api_image
+        command: buildAndPush
+        dockerfile: hospital-frontend/Dockerfile
+        buildContext: hospital-frontend
+        tags: |
+          $(Build.BuildId)
+ 
+    - task: Docker@2
+      displayName: Build & Push Patient API
+      inputs:
+        containerRegistry: DockerHubServiceConnection
+        repository: sathish33/patient_api_image
+        command: buildAndPush
+        dockerfile: patient-api/Dockerfile
+        buildContext: patient-api
+        tags: |
+          $(Build.BuildId)
+ 
+    - task: Docker@2
+      displayName: Build & Push Appointment API
+      inputs:
+        containerRegistry: DockerHubServiceConnection
+        repository: sathish33/appointment_api_image
+        command: buildAndPush
+        dockerfile: appointment-api/Dockerfile
+        buildContext: appointment-api
+        tags: |
+          $(Build.BuildId)
+ 
