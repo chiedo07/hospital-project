@@ -21,7 +21,7 @@ stages:
       displayName: Build & Push Frontend
       inputs:
         containerRegistry: DockerHubServiceConnection
-        repository: sathish33/frontend_api_image
+        repository: chiedo95/frontend_api_image
         command: buildAndPush
         dockerfile: hospital-frontend/Dockerfile
         buildContext: hospital-frontend
@@ -32,7 +32,7 @@ stages:
       displayName: Build & Push Patient API
       inputs:
         containerRegistry: DockerHubServiceConnection
-        repository: sathish33/patient_api_image
+        repository: chiedo95/patient_api_image
         command: buildAndPush
         dockerfile: patient-api/Dockerfile
         buildContext: patient-api
@@ -43,7 +43,7 @@ stages:
       displayName: Build & Push Appointment API
       inputs:
         containerRegistry: DockerHubServiceConnection
-        repository: sathish33/appointment_api_image
+        repository: chiedo95/appointment_api_image
         command: buildAndPush
         dockerfile: appointment-api/Dockerfile
         buildContext: appointment-api
