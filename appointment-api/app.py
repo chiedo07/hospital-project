@@ -8,7 +8,7 @@ CORS(app)
 
 # MySQL configuration
 DB_CONFIG = {
-    'host': 'mysql_hospital',   # Docker network alias
+    'host': 'mysql',   # Docker network alias
     'user': 'user',
     'passwd': 'pass123',
     'db': 'hospital',
