@@ -1,0 +1,13 @@
+trigger:
+  - main
+
+pool:
+  name: Default
+
+
+
+stages:
+    - stage: docker_build
+      displayName:  Build and Push Docker Images
+      jobs:
+          - job: Build
