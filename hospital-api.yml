@@ -4,7 +4,8 @@ trigger:
 pool:
   name: Default
 
-
+variables:
+  - group: my-var
 
 stages:
     - stage: docker_build
