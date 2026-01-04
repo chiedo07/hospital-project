@@ -6,6 +6,11 @@ import MySQLdb.cursors
 app = Flask(__name__)
 CORS(app)
 
+@app.route('/')
+def health():
+    return 'OK', 200
+
+
 # MySQL configuration
 DB_CONFIG = {
     'host': 'mysql',   # Docker network alias
