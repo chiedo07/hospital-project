@@ -55,6 +55,9 @@ stages:
  
 
     - script: |
+        kubectl create namespace hospital --dry-run=client -o yaml | kubectl apply -f -
+      displayName: Create hospital namespace
+    - script: |
         kubectl apply -n hospital -f - <<EOF
         apiVersion: apps/v1
         kind: Deployment
