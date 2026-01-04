@@ -97,4 +97,28 @@ stages:
             targetPort: 3306
         EOF
       displayName: Deploy MySQL (Official)
- 
+    
+    # Helm Values files deployment
+    - script: |
+        helm upgrade --install frontend-api ./hpm \
+          --namespace hospital \
+          -f hpm/values-front.yaml \
+          --set image.tag=$(Build.BuildId) \
+          --set imagePullSecrets[0].name=dockerhub-secret
+      displayName: Deploy UI
+    
+    - script: |
+        helm upgrade --install patient-api ./hpm \
+          --namespace hospital \
+          -f hpm/values-patient.yaml \
+          --set image.tag=$(Build.BuildId) \
+          --set imagePullSecrets[0].name=dockerhub-secret
+      displayName: Deploy Patient API
+    
+    - script: |
+        helm upgrade --install appointment-api ./hpm \
+          --namespace hospital \
+          -f hpm/values-appoint.yaml \
+          --set image.tag=$(Build.BuildId) \
+          --set imagePullSecrets[0].name=dockerhub-secret
+      displayName: Deploy Appointment API
