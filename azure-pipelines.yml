@@ -16,3 +16,44 @@ stages:
     jobs:
     - job: HelmDeploy
       displayName: Helm Deployment
+
+      steps:
+        - checkout: self
+
+        - script: |
+            echo "checking K8S Connection.."
+            kubectl get nodes
+          displayName: check cluster
+        
+        - script: |
+           echo "creating namespace if it does not exist"
+           kubectl create namespace $(namespace) --dry-run=client -o yaml | kubectl apply -f -
+          displayName: Creating namespace
+
+        - script: |
+            echo "Deploying Frontend Service"
+            helm upgrade --install frontend $(chartpath) \
+            -f $(chartpath)/values-front.yaml
+          displayName: Deploy frontend
+        - script: |
+            echo "Deploying patient service"
+            helm upgrade --install patient $(chartPath) \
+            -f $(chartPath)/values-patient.yaml \
+            -n $(namespace)
+          displayName: Deploy patient
+
+        - script: |
+            echo "Deploying appointment service"
+            helm upgrade --install appointment $(chartPath) \
+            -f $(chartPath)/values-appointment.yaml \
+            -n $(namespace)
+          displayName: Deploy appointment
+
+        - script: |
+            echo "Checking Helm releases"
+            helm list -n $(namespace)
+            echo "Checking Pods"
+            kubectl get pods -n $(namespace)
+            echo "Checking Services"
+            kubectl get svc -n $(namespace)
+          displayName: Verify deployment
