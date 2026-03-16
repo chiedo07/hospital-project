@@ -40,8 +40,8 @@ stages:
 
         - script: |
             echo "Deploying Frontend Service"
-            helm upgrade --install frontend $(chartpath) \
-            -f $(chartpath)/values-front.yaml
+            helm upgrade  frontend $(chartpath) \
+            -f $(chartpath)/values-front.yaml \
             -n $(namespace)
           displayName: Deploy frontend
         - script: |
