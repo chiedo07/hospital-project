@@ -42,17 +42,18 @@ stages:
             echo "Deploying Frontend Service"
             helm upgrade --install frontend $(chartpath) \
             -f $(chartpath)/values-front.yaml
+            -n $(namespace)
           displayName: Deploy frontend
         - script: |
             echo "Deploying patient service"
-            helm upgrade --install patient $(chartPath) \
+            helm upgrade --install patient $(chartpath) \
             -f $(chartPath)/values-patient.yaml \
             -n $(namespace)
           displayName: Deploy patient
 
         - script: |
             echo "Deploying appointment service"
-            helm upgrade --install appointment $(chartPath) \
+            helm upgrade --install appointment $(chartpath) \
             -f $(chartPath)/values-appointment.yaml \
             -n $(namespace)
           displayName: Deploy appointment
