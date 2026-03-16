@@ -31,7 +31,7 @@ stages:
           displayName: Creating namespace
 
         - script: |
-            kubectl apply -f mysql.yaml -n $(namespace)
+            kubectl apply -f $(chartpath)mysql.yaml -n $(namespace)
           displayName: Deploy MySQL
 
         - script: |
