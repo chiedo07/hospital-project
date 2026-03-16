@@ -2,7 +2,10 @@ trigger:
 - main
 
 pool:
-  name:ubuntu
+   name: ubuntu
+
+variables:
+  - group: var-aks
 
 steps:
 - script: echo Hello, world!
