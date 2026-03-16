@@ -5,7 +5,9 @@ pool:
    name: ubuntu
 
 variables:
-  - group: var-aks
+  group: var-aks
+  namespace: dev 
+  chartpath: ./hospital
 
 steps:
 - script: echo Hello, world!
