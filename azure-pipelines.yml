@@ -31,6 +31,14 @@ stages:
           displayName: Creating namespace
 
         - script: |
+            kubectl apply -f mysql.yaml -n $(namespace)
+          displayName: Deploy MySQL
+
+        - script: |
+             kubectl rollout status deployment/mysql -n $(namespace) --timeout=180s
+          displayName: Wait for MySQL
+
+        - script: |
             echo "Deploying Frontend Service"
             helm upgrade --install frontend $(chartpath) \
             -f $(chartpath)/values-front.yaml
