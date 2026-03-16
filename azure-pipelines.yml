@@ -54,7 +54,7 @@ stages:
         - script: |
             echo "Deploying appointment service"
             helm upgrade --install appointment $(chartpath) \
-            -f $(chartPath)/values-appointment.yaml \
+            -f $(chartPath)/values-appoint.yaml \
             -n $(namespace)
           displayName: Deploy appointment
 
