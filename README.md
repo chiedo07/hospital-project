@@ -9,7 +9,7 @@ This repository contains a hospital platform built as a collection of services a
 - Docker Compose for local orchestration
 - Azure Pipelines configuration for automated delivery
 - Kubernetes or deployment manifests for application rollout
-This prokject comprises of two api listening on the frontend application that post or gets data to a database through the apis. The Api queries the data base based on request from the client side
+### This project comprises of two api listening on the frontend application that post or gets data to a database through the apis. The Api queries the data base based on request from the client side
 
 ## Repository Structure
 - `appointment-api/` – appointment service
